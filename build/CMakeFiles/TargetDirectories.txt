@@ -92,3 +92,10 @@
 /home/eak100/workspace/catkin_ws/build/simple_arm/CMakeFiles/look_away.dir
 /home/eak100/workspace/catkin_ws/build/simple_arm/CMakeFiles/simple_arm_genpy.dir
 /home/eak100/workspace/catkin_ws/build/simple_arm/CMakeFiles/test.dir
+/home/eak100/workspace/catkin_ws/build/ball_chaser/CMakeFiles/install/strip.dir
+/home/eak100/workspace/catkin_ws/build/ball_chaser/CMakeFiles/edit_cache.dir
+/home/eak100/workspace/catkin_ws/build/ball_chaser/CMakeFiles/list_install_components.dir
+/home/eak100/workspace/catkin_ws/build/ball_chaser/CMakeFiles/test.dir
+/home/eak100/workspace/catkin_ws/build/ball_chaser/CMakeFiles/install/local.dir
+/home/eak100/workspace/catkin_ws/build/ball_chaser/CMakeFiles/rebuild_cache.dir
+/home/eak100/workspace/catkin_ws/build/ball_chaser/CMakeFiles/install.dir
