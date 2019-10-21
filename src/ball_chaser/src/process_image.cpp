@@ -26,7 +26,7 @@ void drive_robot(float lin_x, float ang_z)
 void process_image_callback(const sensor_msgs::Image img)
 {
 
-
+int width = img.width;
 
     // TODO: Loop through each pixel in the image and check if there's a bright white one
     // Then, identify if this pixel falls in the left, mid, or right side of the image
@@ -47,35 +47,41 @@ for (int i=Count_start; i+2<Count_end; i+=3) {
     int G_value = img.data[i+1];
     int B_value = img.data[i+2];
 
+
   if (R_value  == 255 && G_value == 255 && B_value == 255)
   {
-      int x_position = (i % (img.width * 3)) / 3;
-      x_sum += x_position;
+      int x_position = (i % (width * 3)) / 3;
+
+
+
+      x_sum = x_sum + x_position;
+      //ROS_INFO("No ball ,x position :%1.2i",(int)width);
       total_white_pixels += 1;
   }
 }
 
 if (total_white_pixels == 0)
 {
+
   drive_robot(0.0, 0.0);
 }
 else
 {
     int mean_x_position = x_sum / total_white_pixels;
-  if (mean_x_position < img.width / 3)
+  if (mean_x_position < width / 3)
   {
-      ROS_INFO_STREAM("Ball on left");
-    drive_robot(0.5, 0.5);
+      ROS_INFO_STREAM("Ball on left!");
+    drive_robot(0.5, 1);
   }
-  else if (mean_x_position > img.width * 2 / 3)
+  else if (mean_x_position > width * 2 / 3)
   {
-    ROS_INFO_STREAM("Ball on right");
-    drive_robot(0.5, -0.5);
+    ROS_INFO_STREAM("Ball on right!");
+    drive_robot(0.5, -1);
   }
   else
   {
     ROS_INFO_STREAM("Ball ahead!");
-    drive_robot(0.5, 0.0);
+    drive_robot(1, 0.0);
   }
 }
 }
