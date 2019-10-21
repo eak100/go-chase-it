@@ -36,7 +36,8 @@ void process_image_callback(const sensor_msgs::Image img)
     int Count_start = img.data.size() / 3;
     int Count_end = img.data.size() * 2 / 3;
 
-    int total_black_pixels = 0;
+  //  int total_black_pixels = 0;
+    int total_white_pixels = 0;
     int x_sum = 0;
 
 // Scan black pixels
@@ -46,32 +47,35 @@ for (int i=Count_start; i+2<Count_end; i+=3) {
     int G_value = img.data[i+1];
     int B_value = img.data[i+2];
 
-  if (R_value  == 0 && G_value == 0 && B_value == 0)
+  if (R_value  == 255 && G_value == 255 && B_value == 255)
   {
       int x_position = (i % (img.width * 3)) / 3;
       x_sum += x_position;
-      total_black_pixels += 1;
+      total_white_pixels += 1;
   }
 }
 
-if (total_black_pixels == 0)
+if (total_white_pixels == 0)
 {
   drive_robot(0.0, 0.0);
 }
 else
 {
-    int mean_x_position = x_sum / total_black_pixels;
+    int mean_x_position = x_sum / total_white_pixels;
   if (mean_x_position < img.width / 3)
   {
+      ROS_INFO_STREAM("Ball on left");
     drive_robot(0.5, 0.5);
   }
   else if (mean_x_position > img.width * 2 / 3)
   {
+    ROS_INFO_STREAM("Ball on right");
     drive_robot(0.5, -0.5);
   }
   else
   {
-    drive_robot(-0.5, 0.5);
+    ROS_INFO_STREAM("Ball ahead!");
+    drive_robot(0.5, 0.0);
   }
 }
 }
